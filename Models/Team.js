@@ -1,4 +1,5 @@
 const mongoose=require("mongoose")
+const User=require("./User")
 
 const teamScema=new mongoose.Schema({
     name:{
@@ -10,13 +11,13 @@ const teamScema=new mongoose.Schema({
     },
     members:{
         userId:{
-type:mongoose.Schema.Types.ObjectId,
-ref:User
+            type:mongoose.Schema.Types.ObjectId,
+            ref:User
         },
         role:{
-type:String,
-enum:['admin,member'],
-default:'member'
+            type:String,
+            enum:['admin','member'],
+            default:'member'
         }
     } ,
     createdBy:{
@@ -25,7 +26,7 @@ default:'member'
         required:true
     },
 },
-    {timestamps:true}
+  {timestamps:true}
   )
 
-module.exports=mongoose.Model("Team",teamScema)
+module.exports=mongoose.model("Team",teamScema)
