@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express=require("express")
 const cors=require("cors")
 const corsOptions=require("./config/corsOptions")
@@ -7,6 +8,7 @@ const PORT=process.env.PORT||2000
 
 app.use(cors(corsOptions))
 app.use("/api/task", require("./routes/task"))
+app.use(express.json())
 
 app.get('/',(req,res)=>{
     res.send("Hello world!!")
