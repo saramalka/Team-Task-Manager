@@ -1,16 +1,10 @@
 const express=require("express")
 const router=express.Router()
-const Comment=require("../Models/Comment")
+const commentController=require("../Controllers/commentController")
 
-router.post("/",async(req,res)=>{
 
-    const {userId,taskId,content}=req.body
-    if(!userId|!taskId|!content)
-        res.status(400).send('userId,taskId,content are required')
+router.get("/:taskId",require(commentController.getTaskComments))
 
-    const comment=await Comment.create({userId,taskId,content})
-    res.json(comment)
-
-})
+router.post("/",require(commentController.createComment))
 
 module.exports=router

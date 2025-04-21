@@ -1,19 +1,18 @@
 const express=require("express")
 const router=express.Router()
-const User=require("../Models/User")
+const userController=require("../Controllers/userController")
+const verifyToken=require("../config/verifyToken")
+const isAdmin=require("../config/roleMiddelware")
 
 router.use(express.json())
 
-router.get("/",(req,res)=>{
-    res.send()
-})
+router.get("/",require(userController.getAllUsers))
+router.post('/login', userController.login);
+router.get('/me', verifyToken, userController.getMe);
+router.get("/:id",require(userController.getUserByID))
+router.post("/",require(userController.register))
+router.put("/".require(userController.apdateUser))
+router.delete("/",require(verifyToken, isAdmin, userController.deleteUser))
 
-router.post("/",async(req,res)=>{
-    const {name,password,email}=req.body
-    if(!name|!password|!email)
-        res.status(404).json({error:true, message:"name,password and email are required"})
-    const user=await User.create({name,password,email})
-    res.json(user)
-})
 
 module.exports=router

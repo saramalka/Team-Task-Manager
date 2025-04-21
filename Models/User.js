@@ -20,7 +20,7 @@ const UserSchema=new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Team'
         }],
-    role:{
+        teams:{
         type: String,
         enum: ['admin', 'member'],
         default: 'member'
