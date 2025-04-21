@@ -1,4 +1,4 @@
-const Comment=require("../Models/Comment")
+const Comment=require("../Models/comment.model")
 
 const createComment=async(req,res)=>{
 

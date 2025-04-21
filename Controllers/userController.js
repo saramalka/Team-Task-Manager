@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const User=require("../Models/User")
+const User=require("../Models/user.model")
 
 const register=async(req,res)=>{
     const {name,password,email}=req.body
@@ -20,13 +20,16 @@ const register=async(req,res)=>{
 
 
 const getAllUsers= async (req, res) => {
-    
+    try{
     const users = await User.find().lean()
    
     if (!users?.length) {
          return res.status(400).json({ message: 'No users found' })
     }
     res.json(users)
+}catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
 }
 
 const apdateUser=async(req,res)=>{
@@ -91,4 +94,4 @@ const getUserByID = async (req, res) => {
             const user = await User.findById(req.userId).select('-password');
             res.json(user);
           };
-module.exports={createUser,getAllUsers,apdateUser,deleteUser,getUserByID,login,getMe,register}
+module.exports={getAllUsers,apdateUser,deleteUser,getUserByID,login,getMe,register}

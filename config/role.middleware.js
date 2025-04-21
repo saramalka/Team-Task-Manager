@@ -1,6 +1,6 @@
-const User = require('../models/user.model');
+const User = require('../Models/user.model');
 
-isAdmin = async (req, res, next) => {
+const isAdmin = async (req, res, next) => {
   try {
     const user = await User.findById(req.userId);
 
@@ -14,4 +14,4 @@ isAdmin = async (req, res, next) => {
   }
 };
 
-module.exports=isAdmin
+module.exports = { isAdmin };

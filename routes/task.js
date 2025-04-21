@@ -1,6 +1,6 @@
 const express=require("express")
 const router=express.Router()
-const Task = require("../Models/Task");
+const Task = require("../Models/task.model");
 
 router.use(express.json())
 
